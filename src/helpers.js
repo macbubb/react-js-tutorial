@@ -8,7 +8,7 @@ export function Square(props) {
     );
   }
 
-export  function calculateWinner(squares) {
+export function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -26,4 +26,11 @@ export  function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+export function calculateRowCol(i) {
+  const row = Math.floor((i + 1)  / 3);
+  const col = (i + 1) % 3;
+
+  return [row, col];
 }

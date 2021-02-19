@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Board from './board';
-import { calculateWinner } from './helpers.js'
+import { calculateWinner, calculateRowCol } from './helpers.js'
 
 class Game extends React.Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    const lastMove = this.state.lastMove.push(i);
+    const lastMove = this.state.lastMove.push(calculateRowCol(i));
 
     if (calculateWinner(squares) || squares[i]) {
       return;
