@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Board from './board';
 import { calculateWinner, calculateRowCol } from './helpers.js'
+import Move from './move';
 
 class Game extends React.Component {
   constructor(props) {
@@ -51,66 +52,22 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    /*const previousMove = (current != 0) ? this.state.history[this.state.stepNumber - 1] : '';
+    const lastMove = this.state.lastMove;
 
-    const printMove ='';
-    const previousMove = this.state.history[(this.state.stepNumber - 1)];
-
-
-    let i = 0;
-    if (current != 0) {
-      if (current.squares[i] == previousMove.squares[i]) {
-        i++;
-      }
-      else {
-        switch(i){
-          case 0:
-            printMove = '(1, 1)';
-            break;
-          case 1:
-            printMove = '(1, 2)';
-            break;
-          case 2:
-            printMove = '(1, 3)';
-            break;
-          case 3:
-            printMove = '(2, 1)';
-            break;
-          case 4:
-            printMove = '(2, 2)';
-            break;
-          case 5:
-            printMove = '(2, 3)';
-            break;
-          case 6:
-            printMove = '(3, 1)';
-            break;
-          case 7:
-            printMove = '(3, 2)';
-            break;
-          case 8:
-            printMove = '(3, 3)';
-            break;
-          default:
-            console.log('something went wrong finding the last move');
-          }
-        }
-      }
-    else {
-
-    }
-*/
     const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to move #' + move :
-        'Go to game start';
-      return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-          <span> Prior Move: {this.state.history[current]}</span>
-        </li>
-      );
-    });
+    const desc = move ?
+      'Go to move #' + move :
+      'Go to game start';
+    return (
+      <li key={move}>
+        <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        <Move
+          lastMove={lastMove}
+          stepNumber={this.state.stepNumber}
+        />
+      </li>
+    );
+  });
 
     let status;
     if (winner) {

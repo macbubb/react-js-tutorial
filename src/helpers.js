@@ -29,8 +29,8 @@ export function calculateWinner(squares) {
 }
 
 export function calculateRowCol(i) {
-  const row = Math.floor((i + 1)  / 3);
-  const col = (i + 1) % 3;
+  const row = Math.ceil((i + 1)  / 3);
+  const col = (i + 1) < 3 ? (i + 1) : (i + 1) % 3;
 
   return [row, col];
 }
